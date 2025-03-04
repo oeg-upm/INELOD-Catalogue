@@ -1,3 +1,6 @@
+#Lista de niveles de una clasifiación CLASI
+#LN: ¿Cuáles son los niveles jerárquicos de la clasificación 'CLASI'?
+
 PREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  

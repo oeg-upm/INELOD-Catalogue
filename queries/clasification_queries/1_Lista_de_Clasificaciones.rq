@@ -1,0 +1,10 @@
+#Lista de clasificaciones
+#LN: "Recupera todas las clasificaciones estadísticas disponibles en el Virtuoso."
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>
+
+SELECT DISTINCT ?classification
+WHERE {
+  ?x skos:inScheme ?classification .
+}

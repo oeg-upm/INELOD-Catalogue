@@ -1,0 +1,14 @@
+# Lista de las categorías pertenecientes a un nivel.
+# LN: Dame todas las categorías del nivel 1 de la clasificación 'X'.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?level ?concepto
+WHERE {
+  ?classification skos:prefLabel ?concepto ;
+                  skos:member ?level .
+  ?level rdf:type xkos:ClassificationLevel ;
+         skos:inScheme <http://stats.linkeddata.es/voc/clasificaciones/{CLASI}>;
+         xkos:depth "1".
+}

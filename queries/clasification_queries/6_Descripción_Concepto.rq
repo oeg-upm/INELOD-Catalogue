@@ -1,0 +1,11 @@
+#Descripción detalladada de un concepto
+#LN: "Dame la descripción detallada de la categoría 'X' en la clasifiación 'y'."
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?category ?y ?z.
+WHERE {
+  ?category skos:inScheme ?classification ;
+            ?y ?z .
+}

@@ -1,0 +1,14 @@
+#Equivalencia entre conceptos de distintas clasificaciones
+#LN: ¿Qué conceptos en la clasificación 'X' son equivalentes a los de 'Y'?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT  ?labelX ?labelY
+WHERE {
+  ?conceptX xkos:ConceptAssociation ?conceptY;
+            skos:inScheme <http://stats.linkeddata.es/voc/clasificaciones//{CLASI1}> ;
+            skos:prefLabel ?labelXYZ ;
+  ?conceptY skos:inScheme <http://stats.linkeddata.es/voc/clasificaciones//{CLASI2}> ;
+              skos:prefLabel ?labelABC .
+}
