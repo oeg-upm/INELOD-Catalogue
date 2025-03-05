@@ -1,0 +1,19 @@
+#Comparar los niveles de formación entre nacionales y extranjeros.
+#LN: ¿Cómo se distribuye el nivel de formación entre personas con distinta nacionalidad en 2022?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX ex: <http://example.org/ns/>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <http://stats.linkeddata.es/voc/cubes/vocabulary/>
+
+SELECT ?nivelFormacion ?nacionalidad SUM(?cantidad) AS ?total
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:educationLev ?nivelFormacion ;
+       inelod-voc:nationality ?nacionalidad ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue ?cantidad .
+}
+GROUP BY ?nivelFormacion ?nacionalidad
+ORDER BY ?nivelFormacion ?nacionalidad

@@ -1,0 +1,9 @@
+#Lista de observaciones disponibles
+# LN: "Recupera todas las observaciones sobre niveles de educación en el dataset."
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+
+SELECT ?observation
+WHERE {
+  ?observation a qb:Observation .
+}

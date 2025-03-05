@@ -1,0 +1,19 @@
+#Evolución de los niveles de estudios en el tiempo.
+#LN: ¿Cómo ha cambiado el número de personas con educación universitaria entre 2010 y 2022?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX ex: <http://example.org/ns/>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <http://stats.linkeddata.es/voc/cubes/vocabulary/>
+
+SELECT ?periodo SUM(?cantidad) AS ?total
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:educationLev "Estudios universitarios" ;
+       sdmx-dim:refPeriod ?periodo ;
+       sdmx-measure:obsValue ?cantidad .
+  FILTER(?periodo >= "2010" && ?periodo <= "2022")
+}
+GROUP BY ?periodo
+ORDER BY ?periodo

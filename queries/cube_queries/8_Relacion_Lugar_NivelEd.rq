@@ -1,0 +1,19 @@
+# Relación entre el lugar de nacimiento y el nivel educativo alcanzado
+#LN: ¿Cómo se distribuye el nivel de estudios según el lugar de nacimiento en 2022?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX ex: <http://example.org/ns/>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <http://stats.linkeddata.es/voc/cubes/vocabulary/>
+
+SELECT ?lugarNacimiento ?nivelFormacion SUM(?cantidad) AS ?total
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:refArea  ?lugarNacimiento ;
+       sdmx-dim:educationLev ?nivelFormacion ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue ?cantidad .
+}
+GROUP BY ?lugarNacimiento ?nivelFormacion
+ORDER BY ?lugarNacimiento ?nivelFormacion

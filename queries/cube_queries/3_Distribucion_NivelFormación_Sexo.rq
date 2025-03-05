@@ -1,0 +1,18 @@
+# Distribución del nivel de formación por sexo en un año determinado.
+# LN: "Muéstrame el número de personas por nivel de formación y sexo en 2022."
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX ex: <http://example.org/ns/>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+
+SELECT ?nivelFormacion ?sexo SUM(?cantidad) AS ?total
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:educationLev ?nivelFormacion ;
+       sdmx-dim:sex ?sexo ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue  ?cantidad .
+}
+GROUP BY ?nivelFormacion ?sexo
+ORDER BY ?nivelFormacion ?sexo

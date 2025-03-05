@@ -1,0 +1,20 @@
+#Distribución del nivel de estudios por edad y sexo.
+#LN: ¿Cuál es el nivel de formación alcanzado por diferentes grupos de edad y sexo en 2022?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX ex: <http://example.org/ns/>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <http://stats.linkeddata.es/voc/cubes/vocabulary/>
+
+SELECT ?grupoEdad ?sexo ?nivelFormacion SUM(?cantidad) AS ?total
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:age ?grupoEdad ;
+       sdmx-dim:sex ?sexo ;
+       sdmx-dim:educationLev ?nivelFormacion ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue ?cantidad .
+}
+GROUP BY ?grupoEdad ?sexo ?nivelFormacion
+ORDER BY ?grupoEdad ?sexo ?nivelFormacion

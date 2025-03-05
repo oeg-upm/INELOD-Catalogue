@@ -1,0 +1,19 @@
+#Comparar el nivel de estudios entre diferentes ciudades.
+#LN: ¿Existen diferencias en el nivel de estudios entre capitales y grandes ciudades frente a otras zonas en 2022?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX ex: <http://example.org/ns/>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <http://stats.linkeddata.es/voc/cubes/vocabulary/>
+
+SELECT ?ubicacion ?nivelFormacion SUM(?cantidad) AS ?total
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:refArea ?ubicacion ;
+       sdmx-dim:educationLev ?nivelFormacion ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue ?cantidad .
+}
+GROUP BY ?ubicacion ?nivelFormacion
+ORDER BY ?ubicacion ?nivelFormacion

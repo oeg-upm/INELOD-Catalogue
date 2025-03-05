@@ -1,0 +1,15 @@
+# Lista de personas con un nivel de formacion específico en un periodo dado.
+# LN: "¿Cuántas personas alcanzaron el nivel de educación 'Secundaria' en el año 2022?"
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX ex: <http://example.org/ns/>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+
+SELECT ?cantidad
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:educationLev "Primera etapa de educación secundaria y similar" ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue  ?cantidad .
+}
