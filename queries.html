@@ -127,16 +127,18 @@
     </tr>
     <tr>
         <td>¿Qué conceptos en la clasificación ‘X’ son equivalentes a los de ‘Y’?</td>
-        <td><a class="query-button" onclick='generateYasguiLink("PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nSELECT  ?labelX ?labelY\nWHERE {\n  ?conceptX xkos:ConceptAssociation ?conceptY;\n            skos:inScheme <http://stats.linkeddata.es/voc/clasificaciones//{CLASI1}> ;\n            skos:prefLabel ?labelXYZ .\n  ?conceptY skos:inScheme <http://stats.linkeddata.es/voc/clasificaciones//{CLASI2}> ;\n              skos:prefLabel ?labelABC .\n}\n")' target="_blank">Ejecutar Consulta</a></td>
+        <td><a class="query-button" onclick='generateYasguiLink("PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nSELECT  ?conceptX ?conceptY\nWHERE {\n  ?conceptX xkos:ConceptAssociation ?conceptY;\n            skos:inScheme <http://stats.linkeddata.es/voc/clasificaciones/cnae/CNAE93>.\n  ?conceptY skos:inScheme <http://stats.linkeddata.es/voc/clasificaciones/cnae/CNAE09>.\n}\n")' target="_blank">Ejecutar Consulta</a></td>
     </tr>
     <tr>
         <td>¿Cuál es la descripción detallada de la categoría ‘X’ en la clasificación ‘Y’?</td>
-        <td><a class="query-button" onclick='generateYasguiLink("PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nSELECT ?x ?y ?z.\nWHERE {\n  <http://stats.linkeddata.es/voc/clasificaciones/{{CLASI}}/{{NIVEL}}/{{CONCEPT}}> ?y ?z.\n?x ?y ?z .\n}\n")' target="_blank">Ejecutar Consulta</a></td>
+        <td><a class="query-button" onclick='generateYasguiLink("PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nSELECT ?x ?y ?z\nWHERE {\n  <http://stats.linkeddata.es/voc/clasificaciones/{{CLASI}}/{{NIVEL}}/{{CONCEPT}}> ?y ?z.\n}\n")' target="_blank">Ejecutar Consulta</a></td>
     </tr>
 
 </table>
 <table>
     <h2>Consultas de Cubos de datos</h2>
+
+    <h3>Educación</h3>
     <tr>
         <th>Descripcion</th>
         <th>Enlace a Consulta</th>
@@ -178,3 +180,5 @@
       <td><a class="query-button" onclick='generateYasguiLink("PREFIX inelod:<https://stats.linkeddata.es/voc/CAP/#>\nPREFIX qb: <http://purl.org/linked-data/cube#>\n select ?s ?p ?o where {\n  ?s ?p ?o .\n    <http://stats.linkeddata.es/voc/cubes/66615> ?p ?o .\n}\n")' target="_blank">Ejecutar Consulta</a></td>
     </tr>
 </table>
+
+<h3>Demografía</h3>
