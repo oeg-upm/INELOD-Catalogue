@@ -3,9 +3,9 @@
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
-PREFIX inelod:       <https://stats.linkeddata.es/voc/CAP/#> 
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
 
-SELECT ?paisProcedencia ?cantidad
+SELECT ?paisProcedencia (SUM(?cantidad) AS ?total)
 WHERE {
   ?obs a qb:Observation ;
        sdmx-dim:refPeriod "2022" ;
@@ -13,4 +13,4 @@ WHERE {
        sdmx-measure:obsValue ?cantidad .
 }
 GROUP BY ?paisProcedencia
-ORDER BY DESC(?cantidad)
+ORDER BY DESC(?total)

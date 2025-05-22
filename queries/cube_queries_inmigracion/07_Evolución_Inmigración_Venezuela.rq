@@ -3,14 +3,14 @@
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
-PREFIX inelod:       <https://stats.linkeddata.es/voc/CAP/#> 
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
 
-SELECT ?periodo ?cantidad
+SELECT ?periodo (SUM(?cantidad) AS ?total)
 WHERE {
   ?obs a qb:Observation ;
        sdmx-dim:refPeriod ?periodo ;
        inelod:countryOfOrigin "Venezuela" ;
-       sdmx-dim:obsValue ?cantidad .
+       sdmx-measure:obsValue ?cantidad .
   FILTER(?periodo >= "2015" && ?periodo <= "2022")
 }
 GROUP BY ?periodo

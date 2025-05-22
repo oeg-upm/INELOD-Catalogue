@@ -6,7 +6,7 @@ PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
 
 
-SELECT ?periodo ?cantidad
+SELECT ?periodo (SUM(?cantidad) AS ?total)
 WHERE {
   ?obs a qb:Observation ;
        sdmx-dim:refPeriod ?periodo ;

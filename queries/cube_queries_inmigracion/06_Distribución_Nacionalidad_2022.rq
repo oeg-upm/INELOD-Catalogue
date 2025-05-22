@@ -3,14 +3,14 @@
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
-PREFIX inelod:       <https://stats.linkeddata.es/voc/CAP/#> 
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
 
-SELECT ?nacionalidad ?cantidad
+SELECT ?nacionalidad (SUM(?cantidad) AS ?total)
 WHERE {
   ?obs a qb:Observation ;
        sdmx-dim:refPeriod "2022" ;
        inelod:nationality ?nacionalidad ;
-       smdx-measure:obsValue ?cantidad .
+       sdmx-measure:obsValue ?cantidad .
 }
 GROUP BY ?nacionalidad
-ORDER BY DESC(?cantidad)
+ORDER BY DESC(?total)
