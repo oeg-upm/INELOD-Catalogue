@@ -1,0 +1,17 @@
+# LN: ¿Qué relación hay entre el país de nacimiento y el nivel educativo alcanzado por las personas?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+
+SELECT ?paisNacimiento ?nivelFormacion (SUM(?cantidad) AS ?total)
+WHERE {
+  ?obs a qb:Observation ;
+       inelod-voc:countryOfBirth ?paisNacimiento ;
+       sdmx-dim:educationLev ?nivelFormacion ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue ?cantidad .
+}
+GROUP BY ?paisNacimiento ?nivelFormacion
+ORDER BY ?paisNacimiento ?nivelFormacion

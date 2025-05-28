@@ -1,0 +1,25 @@
+# LN: ¿Cuál es el nivel de estudios alcanzado por personas inmigrantes según su nacionalidad?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+
+SELECT ?nacionalidad ?nivelEducativo (SUM(?cantidad) AS ?total)
+WHERE {
+  ?obsInmigracion a qb:Observation ;
+                  inelod-voc:nationality ?nacionalidad ;
+                  sdmx-dim:refPeriod ?periodo ;
+                  sdmx-measure:obsValue ?cantidadInmigracion .
+
+  ?obsEducacion a qb:Observation ;
+                inelod-voc:nationality ?nacionalidad ;
+                sdmx-dim:refPeriod ?periodo ;
+                sdmx-dim:educationLev ?nivelEducativo ;
+                sdmx-measure:obsValue ?cantidadEducacion .
+
+  FILTER(?periodo = "2022")
+  BIND(?cantidadEducacion AS ?cantidad)
+}
+GROUP BY ?nacionalidad ?nivelEducativo
+ORDER BY ?nacionalidad ?nivelEducativo

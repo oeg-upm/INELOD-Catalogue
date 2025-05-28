@@ -1,0 +1,18 @@
+# LN ¿Cómo varía el nivel educativo alcanzado según el lugar de nacimiento y la nacionalidad?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+
+SELECT ?lugarNacimiento ?nacionalidad ?nivelFormacion (SUM(?cantidad) AS ?total)
+WHERE {
+  ?obs a qb:Observation ;
+       inelod-voc:placeOfBirth ?lugarNacimiento ;
+       inelod-voc:nationality ?nacionalidad ;
+       sdmx-dim:educationLev ?nivelFormacion ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue ?cantidad .
+}
+GROUP BY ?lugarNacimiento ?nacionalidad ?nivelFormacion
+ORDER BY DESC(?total)

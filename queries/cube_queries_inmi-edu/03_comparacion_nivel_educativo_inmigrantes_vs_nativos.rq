@@ -1,0 +1,21 @@
+# LN: ¿Cómo se comparan los niveles de estudios alcanzados entre inmigrantes y personas nacidas en el país?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+
+SELECT ?grupo (?nivelFormacion) (SUM(?cantidad) AS ?total)
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:educationLev ?nivelFormacion ;
+       inelod-voc:placeOfBirth ?lugarNacimiento ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue ?cantidad .
+
+  BIND(
+    IF(?lugarNacimiento = "España") AS ?grupo
+  )
+}
+GROUP BY ?grupo ?nivelFormacion
+ORDER BY ?grupo ?nivelFormacion

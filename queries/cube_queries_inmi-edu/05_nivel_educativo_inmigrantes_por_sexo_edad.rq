@@ -1,0 +1,21 @@
+# LN: ¿Cuál es el nivel educativo de los inmigrantes según el sexo y el grupo de edad?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+
+SELECT ?sexo ?grupoEdad ?nivelFormacion (SUM(?cantidad) AS ?total)
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:sex ?sexo ;
+       sdmx-dim:age ?grupoEdad ;
+       sdmx-dim:educationLev ?nivelFormacion ;
+       inelod-voc:placeOfBirth ?lugarNacimiento ;
+       sdmx-dim:refPeriod "2022" ;
+       sdmx-measure:obsValue ?cantidad .
+
+  FILTER(?lugarNacimiento != "España")
+}
+GROUP BY ?sexo ?grupoEdad ?nivelFormacion
+ORDER BY ?sexo ?grupoEdad ?nivelFormacion

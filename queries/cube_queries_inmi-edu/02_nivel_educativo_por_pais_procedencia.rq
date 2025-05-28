@@ -1,0 +1,25 @@
+# LN: ¿Qué niveles de formación tienen las personas inmigrantes según su país de procedencia?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+
+SELECT ?paisProcedencia ?nivelFormacion (SUM(?cantidad) AS ?total)
+WHERE {
+  ?obsInmigracion a qb:Observation ;
+                  inelod-voc:countryOfOrigin ?paisProcedencia ;
+                  sdmx-dim:refPeriod ?periodo ;
+                  sdmx-measure:obsValue ?cantidadInmigracion .
+
+  ?obsEducacion a qb:Observation ;
+                inelod-voc:countryOfOrigin ?paisProcedencia ;
+                sdmx-refPeriod ?periodo ;
+                sdmx-dim:educationLev ?nivelFormacion ;
+                sdmx-measure:obsValue ?cantidadEducacion .
+
+  FILTER(?periodo = "2022")
+  BIND(?cantidadEducacion AS ?cantidad)
+}
+GROUP BY ?paisProcedencia ?nivelFormacion
+ORDER BY DESC(?total)
