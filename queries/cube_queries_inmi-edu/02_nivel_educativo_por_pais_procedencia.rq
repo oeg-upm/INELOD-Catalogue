@@ -13,8 +13,8 @@ WHERE {
                   sdmx-measure:obsValue ?cantidadInmigracion .
 
   ?obsEducacion a qb:Observation ;
-                inelod-voc:countryOfOrigin ?paisProcedencia ;
-                sdmx-refPeriod ?periodo ;
+                inelod-voc:countryOfBirth ?paisProcedencia ;
+                sdmx-dim:refPeriod ?periodo ;
                 sdmx-dim:educationLev ?nivelFormacion ;
                 sdmx-measure:obsValue ?cantidadEducacion .
 
