@@ -1,0 +1,43 @@
+# LN: ¿Qué países tienen simultáneamente un alto número de inmigrantes, personas en formación, y turistas en 2022?
+
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sec-pub: <http://datos.gob.es/kos/sector-publico/sector/>
+
+SELECT ?pais (SUM(?inmigrantes) AS ?totalInmigrantes) 
+              (SUM(?educandos) AS ?totalEducacion) 
+              (SUM(?turistas) AS ?totalTurismo)
+WHERE {
+
+  # Datos de inmigración
+  OPTIONAL {
+    ?obsInmi qb:dataSet ?cuboInmi ;
+             inelod:nationality ?pais ;
+             sdmx-dim:refPeriod "2022" ;
+             inelod:numberOfPeople ?inmigrantes .
+    ?cuboInmi dcat:theme sec-pub:inmigracionyemigracion .
+  }
+
+  # Datos de educación
+  OPTIONAL {
+    ?obsEdu qb:dataSet ?cuboEdu ;
+            inelod:countryOfBirth ?pais ;
+            sdmx-dim:refPeriod "2022" ;
+            inelod:numberOfPeople ?educandos .
+    ?cuboEdu dcat:theme sec-pub:educacion .
+  }
+
+  # Datos de turismo
+  OPTIONAL {
+    ?obsTur qb:dataSet ?cuboTur ;
+            inelod:countryOfResidence ?pais ;
+            sdmx-dim:refPeriod ?periodo ;
+            inelod:numberOfTouristsABSValue ?turistas .
+    ?cuboTur dcat:theme sec-pub:turismo .
+    FILTER(STRSTARTS(STR(?periodo), "2022"))
+  }
+}
+GROUP BY ?pais
+ORDER BY DESC(?totalTurismo)

@@ -1,0 +1,24 @@
+# LN: ¿Qué relación existe entre el nivel educativo de los inmigrantes y el número de turistas provenientes del mismo país de residencia, en un mismo periodo?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+
+SELECT ?paisResidencia ?nivelEducativo (SUM(?numInmigrantes) AS ?totalInmigrantes) (SUM(?numTuristas) AS ?totalTuristas)
+WHERE {
+  {
+    ?obs1 sdmx-dim:educationLev ?nivelEducativo ;
+          inelod:countryNationality ?paisResidencia ;
+          sdmx-dim:refPeriod "2022" ;
+          inelod:numberOfPeople ?numInmigrantes .
+  }
+  UNION
+  {
+    ?obs2 inelod:countryOfResidence ?paisResidencia ;
+          sdmx-dim:refPeriod ?periodo ;
+          inelod:numberOfTouristsABSValue ?numTuristas .
+    FILTER(STRSTARTS(STR(?periodo), "2022"))
+  }
+}
+GROUP BY ?paisResidencia ?nivelEducativo
+ORDER BY DESC(?totalTuristas)

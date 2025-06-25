@@ -1,5 +1,4 @@
-# Consulta SPARQL
-# Descripción: ¿Cómo ha evolucionado el número de turistas mes a mes por comunidad autónoma durante el año 2024?
+# LN: ¿Cómo ha evolucionado el número de turistas mes a mes por comunidad autónoma durante el año 2024?
 
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 

@@ -1,5 +1,4 @@
-# Consulta SPARQL
-# Descripción: ¿Cuál es la tasa de variación acumulada según el motivo del viaje y el país de residencia para el periodo 2024-12?
+# LN: ¿Cuál es la tasa de variación acumulada según el motivo del viaje y el país de residencia para el periodo 2024-12?
 
 PREFIX ex: <http://example.org/>
 PREFIX qb: <http://purl.org/linked-data/cube#>

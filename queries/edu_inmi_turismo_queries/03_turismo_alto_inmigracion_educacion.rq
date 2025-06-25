@@ -1,0 +1,35 @@
+# LN: ¿Cuál es el número de inmigrantes en España, el total de turistas por comunidad autónoma y la media de niveles educativos en las capitales y grandes ciudades?
+
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sec-pub: <http://datos.gob.es/kos/sector-publico/sector/>
+
+SELECT ?comunidad (SUM(?inmigrantes) AS ?InmigrantesEspaña) (AVG(?nivelEducativo) AS ?nivelPromedio) (SUM(?turistas) AS ?totalTuristas)
+WHERE {
+  {
+    ?obs1 qb:dataSet ?cuboInmi ;
+          inelod:countryOfBirth "España" ;
+          sdmx-dim:refPeriod "2022" ;
+          inelod:numberOfPeople ?inmigrantes .
+    ?cuboInmi dcat:theme sec-pub:inmigracionyemigracion .
+  }
+  {
+    ?obs2 qb:dataSet ?cuboEdu ;
+          inelod:city ?ciudad ;
+          sdmx-dim:refPeriod "2022" ;
+          sdmx-dim:educationLev ?nivelEducativo .
+    ?cuboEdu dcat:theme sec-pub:educacion .
+  }
+  {
+    ?obs3 qb:dataSet ?CuboTurismoPorComunidad ;
+          inelod:ccaa ?comunidad ;
+          sdmx-dim:refPeriod ?periodo ;
+          inelod:numberOfTouristsABSValue ?turistas.
+    ?cuboTur dcat:theme sec-pub:turismo .
+    FILTER(STRSTARTS(STR(?periodo), "2022"))      
+  }
+}
+GROUP BY ?comunidad
+ORDER BY DESC(?totalTuristas)
