@@ -1,0 +1,35 @@
+# LN: ¿Cuántos turistas han visitado cada comunidad autónoma según el país de residencia y el motivo del viaje?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+
+SELECT ?dimensionTipo ?dimensionValor (SUM(?numeroTuristas) AS ?totalTuristas)
+WHERE {
+  {
+    ?obs a qb:Observation ;
+         sdmx-dim:refPeriod "2024M08" ;
+         inelod:countryOfResidence ?dimensionValor ;
+         inelod:numberOfTouristsABSValue ?numeroTuristas .
+    BIND("PaísResidencia" AS ?dimensionTipo)
+  }
+  UNION
+  {
+    ?obs a qb:Observation ;
+         sdmx-dim:refPeriod "2024M08" ;
+         inelod:travelReason ?dimensionValor ;
+         inelod:numberOfTouristsABSValue ?numeroTuristas .
+    BIND("MotivoViaje" AS ?dimensionTipo)
+  }
+  UNION
+  {
+        ?obs a qb:Observation ;
+         sdmx-dim:refPeriod "2024M08" ;
+         inelod:ccaa ?dimensionValor ;
+         inelod:numberOfTouristsABSValue ?numeroTuristas .
+    BIND("ComunidadAutonoma" AS ?dimensionTipo)
+  }
+
+}
+GROUP BY ?dimensionTipo ?dimensionValor
+ORDER BY ?dimensionTipo DESC(?totalTuristas)

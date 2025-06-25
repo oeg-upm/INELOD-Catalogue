@@ -1,0 +1,15 @@
+# Consulta SPARQL
+# Descripción: ¿Cuál ha sido la tasa de variación anual de turistas por tipo de visitante en el periodo 2024-12?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+
+SELECT ?tipoVisitante ?tasaVariacionAnual
+WHERE {
+  ?obs a qb:Observation ;
+       inelod:touristType ?tipoVisitante ;
+       inelod:numberOfTouristsAnnualVarianceRate ?tasaVariacionAnual ;
+       sdmx-dim:refPeriod "2024M12" .
+}
+GROUP BY ?tipoVisitante

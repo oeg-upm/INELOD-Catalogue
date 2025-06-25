@@ -1,0 +1,17 @@
+# Consulta SPARQL
+# Descripción: ¿Cuántos turistas se han acumulado en lo que va de año por comunidad autónoma y periodo?
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+ 
+SELECT ?comunidad ?periodo (SUM(?turistasAcumulados) AS ?totalAcumulado)
+WHERE {
+  ?obs a qb:Observation ;
+       inelod:ccaa ?comunidad ;
+       sdmx-dim:refPeriod ?periodo ;
+       inelod:numberOfTouristsAccumulated ?turistasAcumulados .
+  FILTER(STRSTARTS(STR(?periodo), "2024"))
+}
+GROUP BY ?comunidad ?periodo
+ORDER BY ?comunidad ?periodo

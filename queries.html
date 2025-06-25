@@ -219,6 +219,34 @@
       <td><a class="query-button" onclick='generateYasguiLink("PREFIX dcat: <http://www.w3.org/ns/dcat#> \nPREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>\nPREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>\nSELECT ?lugarNacimiento ?nacionalidad (SUM(?cantidad) AS ?total)\nWHERE {\n  ?obs a qb:Observation ;\n   qb:dataSet ?dataset;\n    sdmx-dim:refPeriod \"2022\" ;\n       inelod:countryOfBirth ?lugarNacimiento ;\n       inelod:nationality ?nacionalidad ;\n       inelod:numberOfPeople ?cantidad .\n ?dataset dcat:theme <http://datos.gob.es/kos/sector-publico/sector/inmigracionyemigracion>\n}\nGROUP BY ?lugarNacimiento ?nacionalidad\nORDER BY DESC(?total)")' target="_blank">Ejecutar Consulta</a></td>
   </tr>    
 </table>
+
+<h3>Turismo</h3>
+  <tr>
+      <th>Descripcion</th>
+      <th>Enlace a Consulta</th>
+  </tr>
+  <tr>
+      <td>¿Cuántos turistas han visitado cada comunidad autónoma según el país de residencia y el motivo del viaje?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX ex: <http://example.org/>\nPREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> \nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nSELECT ?dimensionTipo ?dimensionValor (SUM(?numeroTuristas) AS ?totalTuristas)\nWHERE {\n  {\n    ?obs a qb:Observation ;\n         sdmx-dim:refPeriod \"2024M08\" ;\n         inelod:countryOfResidence ?dimensionValor ;\n         inelod:numberOfTouristsABSValue ?numeroTuristas .\n    BIND(\"PaísResidencia\" AS ?dimensionTipo)\n  }\n  UNION\n  {\n    ?obs a qb:Observation ;\n         sdmx-dim:refPeriod \"2024M08\" ;\n         inelod:travelReason ?dimensionValor ;\n         inelod:numberOfTouristsABSValue ?numeroTuristas .\n    BIND(\"MotivoViaje\" AS ?dimensionTipo)\n  }\n  UNION\n  {\n        ?obs a qb:Observation ;\n         sdmx-dim:refPeriod \"2024M08\" ;\n         inelod:ccaa ?dimensionValor ;\n         inelod:numberOfTouristsABSValue ?numeroTuristas .\n    BIND(\"ComunidadAutonoma\" AS ?dimensionTipo)\n  }\n}\nGROUP BY ?dimensionTipo ?dimensionValor\nORDER BY ?dimensionTipo DESC(?totalTuristas)")' target="_blank">Ejecutar Consulta</a></td>
+  </tr>
+  <tr>
+      <td>¿Cuál ha sido la tasa de variación anual de turistas por tipo de visitante en el periodo 2024-12?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX ex: <http://example.org/>\nPREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> \nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nSELECT ?tipoVisitante ?tasaVariacionAnual\nWHERE {\n  ?obs a qb:Observation ;\n       inelod:touristType ?tipoVisitante ;\n       inelod:numberOfTouristsAnnualVarianceRate ?tasaVariacionAnual ;\n       sdmx-dim:refPeriod \"2024M12\" .\n}\nGROUP BY ?tipoVisitante")' target="_blank">Ejecutar Consulta</a></td>
+  </tr>
+  <tr>
+      <td>¿Cuántos turistas se han acumulado en lo que va de año por comunidad autónoma y periodo?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> \nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nSELECT ?comunidad ?periodo (SUM(?turistasAcumulados) AS ?totalAcumulado)\nWHERE {\n  ?obs a qb:Observation ;\n       inelod:ccaa ?comunidad ;\n       sdmx-dim:refPeriod ?periodo ;\n       inelod:numberOfTouristsAccumulated ?turistasAcumulados .\n  FILTER(STRSTARTS(STR(?periodo), \"2024\"))\n}\nGROUP BY ?comunidad ?periodo\nORDER BY ?comunidad ?periodo")' target="_blank">Ejecutar Consulta</a></td>
+  </tr>   
+  <tr>
+      <td>¿Cuál es la tasa de variación acumulada según el motivo del viaje y el país de residencia para el periodo 2024-12?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX ex: <http://example.org/>\nPREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> \nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nSELECT ?dimensionTipo ?dimensionValor ?tasaAcumulada\nWHERE {\n  {\n    ?obs a qb:Observation ;\n         inelod:countryOfResidence ?dimensionValor ;\n         inelod:numberOfTouristsAccumulatedVarianceRate ?tasaAcumulada ;\n         sdmx-dim:refPeriod \"2024M12\" .\n    BIND(\"PaísResidencia\" AS ?dimensionTipo)\n  }\n  UNION\n  {\n  	?obs a qb:Observation ;\n         inelod:travelReason ?dimensionValor ;\n         inelod:numberOfTouristsAccumulatedVarianceRate ?tasaAcumulada ;\n         sdmx-dim:refPeriod \"2024M12\" .\n    BIND(\"MotivoViaje\" AS ?dimensionTipo)\n  }\n}")' target="_blank">Ejecutar Consulta</a></td>
+  </tr>
+  <tr>
+      <td>¿Cómo ha evolucionado el número de turistas mes a mes por comunidad autónoma durante el año 2024?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> \nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nSELECT ?comunidad ?periodo (SUM(?numTuristas) AS ?total)\nWHERE {\n  ?obs a qb:Observation ;\n       inelod:ccaa ?comunidad ;\n       sdmx-dim:refPeriod ?periodo ;\n       inelod:numberOfTouristsABSValue ?numTuristas .\n  FILTER(STRSTARTS(STR(?periodo), "2024"))\n}\nGROUP BY ?comunidad ?periodo\nORDER BY ?comunidad ?periodo")' target="_blank">Ejecutar Consulta</a></td>
+  </tr> 
+</table>
+
 <table>
 <h3>Educación-Demografía</h3>
   <tr>
