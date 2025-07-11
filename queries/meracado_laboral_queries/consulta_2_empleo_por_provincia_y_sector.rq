@@ -1,0 +1,18 @@
+# LN: Obtiene la tasa de empleo media en cada provincia por sexo en el último año disponible.
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?periodo ?provincia (AVG(?tasaEmpleo) AS ?tasaMediaEmpleo)
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:refPeriod ?periodo ;
+       inelod:provinces ?provincia ;
+       inelod:employmentRate ?tasaEmpleo .
+
+  FILTER(STRSTARTS(STR(?periodo), "2025"))
+}
+GROUP BY ?periodo ?provincia ?sector
+ORDER BY DESC(?tasaMediaEmpleo)

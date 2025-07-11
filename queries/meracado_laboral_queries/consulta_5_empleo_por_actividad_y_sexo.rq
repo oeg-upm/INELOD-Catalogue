@@ -1,0 +1,17 @@
+# LN: Analiza cómo varía la media de porcentaje de empleo según la actividad económica y el sexo de los trabajadores.
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+SELECT ?actividad ?sexo (AVG(?porcentajeEmpleo) AS ?mediaporcentajeEmpleo)
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:refPeriod ?periodo ;
+       inelod:economicalActivity ?actividad ;
+       sdmx-dim:sex ?sexo ;
+       inelod:employedPercentage ?porcentajeEmpleo.
+  
+  	FILTER(STRSTARTS(STR(?periodo), "2022"))
+}
+GROUP BY ?actividad ?sexo
+ORDER BY DESC(?mediaporcentajeEmpleo)

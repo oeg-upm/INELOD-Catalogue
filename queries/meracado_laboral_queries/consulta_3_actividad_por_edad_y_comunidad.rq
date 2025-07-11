@@ -1,0 +1,20 @@
+# LN: Compara la tasa de actividad de distinto sexo en cada provincia.
+
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX place: <http://purl.org/ontology/places/>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+
+SELECT ?provLabel ?sexo (AVG(?tasaActividad) AS ?tasaMediaActividad)
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:refPeriod ?periodo ;
+       sdmx-dim:sex ?sexo ;
+       inelod:provinces ?provLabel ;  
+       inelod:activityRate ?tasaActividad .
+}
+GROUP BY ?provLabel 
+ORDER BY ?provLabel
+

@@ -1,0 +1,17 @@
+# LN: Muestra cómo ha variado la tasa de paro por sexo en España a lo largo de 2022.
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+
+SELECT ?periodo ?sexo (AVG(?tasaParo) AS ?tasaMediaParo)
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:refPeriod ?periodo ;
+       sdmx-dim:sex ?sexo ;
+       inelod:unemploymentRate ?tasaParo .
+
+  FILTER(STRSTARTS(STR(?periodo), "2022"))
+}
+GROUP BY ?periodo ?sexo
+ORDER BY ?periodo ?sexo

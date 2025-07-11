@@ -1,0 +1,16 @@
+# LN: Lista las comunidades con mayor tasa media de paro durante el año 2023.
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+
+SELECT ?comunidad (AVG(?tasaParo) AS ?tasaMediaParo)
+WHERE {
+  ?obs a qb:Observation ;
+       sdmx-dim:refPeriod ?periodo ;
+       inelod:ccaa ?comunidad ;
+       inelod:unemploymentRate ?tasaParo .
+	FILTER(STRSTARTS(STR(?periodo), "2023"))
+}
+GROUP BY ?comunidad
+ORDER BY DESC(?tasaMediaParo)

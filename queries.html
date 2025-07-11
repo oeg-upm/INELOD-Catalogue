@@ -179,6 +179,14 @@
       <td>¿Cómo se distribuye el nivel de estudios según el lugar de nacimiento en 2022?</td>
       <td><a class="query-button" onclick='generateYasguiLink("PREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX ex: <http://example.org/ns/>\nPREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>\nPREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>\nPREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>\nSELECT ?lugarNacimiento ?nivelFormacion ?cantidad \nWHERE {\n  ?obs a qb:Observation ;\n       inelod-voc:placeOfBirth  ?lugarNacimiento ;\n       sdmx-dim:educationLev ?nivelFormacion ;\n       sdmx-dim:refPeriod \"2022\" ;\n       inelod-voc:numberOfPeople ?cantidad .\n}\nGROUP BY ?lugarNacimiento ?nivelFormacion\nORDER BY ?lugarNacimiento ?nivelFormacion\n")' target="_blank">Ejecutar Consulta</a></td>
     </tr>
+    <tr>
+      <td>¿Cómo se distribuye el nivel educativo según la comunidad autónoma?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nPREFIX place: <http://purl.org/ontology/places#>\nPREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nPREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>\nPREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>\nSELECT ?comuLabel ?nivelFormacion (SUM(?cantidad) AS ?totalPersonas)\nWHERE {\n  ?obs a qb:Observation ;\n	   inelod-voc:municipality ?munLab ;\n  	   sdmx-dim:educationLev ?nivelFormacion ;\n       sdmx-dim:refPeriod \"2022\" ;\n       inelod-voc:numberOfPeople ?cantidad .\n  ?mun skos:prefLabel ?munLab;\n       place:in ?prov .\n  ?prov place:in ?comunidad.\n  ?comunidad skos:prefLabel ?comuLabel\n}\nGROUP BY ?comuLabel ?nivelFormacion\nORDER BY ?comuLabel ?nivelFormacion")' target="_blank">Ejecutar Consulta</a></td>
+    </tr>
+    <tr>
+      <td>¿Cómo se distribuye el nivel educativo según la provincia y nacionalidad?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nPREFIX place: <http://purl.org/ontology/places#>\nPREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nPREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>\nPREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>\nSELECT ?provLabel ?nationality ?nivelFormacion (SUM(?cantidad) AS ?totalPersonas)\nWHERE {\n  ?obs a qb:Observation ;\n	   inelod-voc:municipality ?munLab ;\n  	   sdmx-dim:educationLev ?nivelFormacion ;\n       sdmx-dim:refPeriod \"2022\" ;\n       inelod-voc:nationality ?nationality;\n       inelod-voc:numberOfPeople ?cantidad .\n  ?mun skos:prefLabel ?munLab;\n       place:in ?prov .\n  ?prov place:in ?comunidad;\n        skos:prefLabel ?provLabel.\n}\nGROUP BY ?provLabel ?nationality ?nivelFormacion\nORDER BY ?provLabel ?nationality ?nivelFormacion")' target="_blank">Ejecutar Consulta</a></td>
+    </tr>  
 </table>
 <table>
 <h3>Demografía</h3>
@@ -245,6 +253,34 @@
   <tr>
       <td>¿Cómo ha evolucionado el número de turistas mes a mes por comunidad autónoma durante el año 2024?</td>
       <td><a class="query-button" onclick='generateYasguiLink("PREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> \nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nSELECT ?comunidad ?periodo (SUM(?numTuristas) AS ?total)\nWHERE {\n  ?obs a qb:Observation ;\n       inelod:ccaa ?comunidad ;\n       sdmx-dim:refPeriod ?periodo ;\n       inelod:numberOfTouristsABSValue ?numTuristas .\n  FILTER(STRSTARTS(STR(?periodo), \"2024\"))\n}\nGROUP BY ?comunidad ?periodo\nORDER BY ?comunidad ?periodo")' target="_blank">Ejecutar Consulta</a></td>
+  </tr> 
+</table>
+
+<table>
+<h3>Mercado Laboral</h3>
+  <tr>
+      <th>Descripcion</th>
+      <th>Enlace a Consulta</th>
+  </tr>
+  <tr>
+      <td>¿Cómo ha variado la tasa de paro por sexo en España a lo largo de 2022.?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>\nSELECT ?periodo ?sexo (AVG(?tasaParo) AS ?tasaMediaParo)\nWHERE {\n  ?obs a qb:Observation ;\n       sdmx-dim:refPeriod ?periodo ;\n       sdmx-dim:sex ?sexo ;\n       inelod:unemploymentRate ?tasaParo .\n  FILTER(STRSTARTS(STR(?periodo), \"2022\"))\n}\nGROUP BY ?periodo ?sexo\nORDER BY ?periodo ?sexo")' target="_blank">Ejecutar Consulta</a></td>
+  </tr>
+  <tr>
+      <td>¿Cuál ha sido la tasa de empleo media en cada provincia por sexo en el último año?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nSELECT ?periodo ?provincia (AVG(?tasaEmpleo) AS ?tasaMediaEmpleo)\nWHERE {\n  ?obs a qb:Observation ;\n       sdmx-dim:refPeriod ?periodo ;\n       inelod:provinces ?provincia ;\n       inelod:employmentRate ?tasaEmpleo .\n  FILTER(STRSTARTS(STR(?periodo), \"2025\"))\n}\nGROUP BY ?periodo ?provincia ?sector\nORDER BY DESC(?tasaMediaEmpleo)")' target="_blank">Ejecutar Consulta</a></td>
+  </tr>
+  <tr>
+      <td>¿Cuál es la tasa de actividad por sexo en cada provincia?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nPREFIX place: <http://purl.org/ontology/places/>\nPREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>\nSELECT ?provLabel ?sexo (AVG(?tasaActividad) AS ?tasaMediaActividad)\nWHERE {\n  ?obs a qb:Observation ;\n       sdmx-dim:refPeriod ?periodo ;\n       sdmx-dim:sex ?sexo ;\n       inelod:provinces ?provLabel ;  \n       inelod:activityRate ?tasaActividad .\n}\nGROUP BY ?provLabel \nORDER BY ?provLabel")' target="_blank">Ejecutar Consulta</a></td>
+  </tr>   
+  <tr>
+      <td>¿Cuáles son las comunidades con mayor tasa media de paro durante el año 2023.?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>\nSELECT ?comunidad (AVG(?tasaParo) AS ?tasaMediaParo)\nWHERE {\n  ?obs a qb:Observation ;\n       sdmx-dim:refPeriod ?periodo ;\n       inelod:ccaa ?comunidad ;\n       inelod:unemploymentRate ?tasaParo .\n	FILTER(STRSTARTS(STR(?periodo), \"2023\"))\n}\nGROUP BY ?comunidad\nORDER BY DESC(?tasaMediaParo)")' target="_blank">Ejecutar Consulta</a></td>
+  </tr>
+  <tr>
+      <td>¿Ccómo varía la media de porcentaje de empleo según la actividad económica y el sexo de los trabajadores?</td>
+      <td><a class="query-button" onclick='generateYasguiLink("PREFIX qb: <http://purl.org/linked-data/cube#>\nPREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>\nPREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#>\nSELECT ?actividad ?sexo (AVG(?porcentajeEmpleo) AS ?mediaporcentajeEmpleo)\nWHERE {\n  ?obs a qb:Observation ;\n       sdmx-dim:refPeriod ?periodo ;\n       inelod:economicalActivity ?actividad ;\n       sdmx-dim:sex ?sexo ;\n       inelod:employedPercentage ?porcentajeEmpleo.\n  	FILTER(STRSTARTS(STR(?periodo), \"2022\"))\n}\nGROUP BY ?actividad ?sexo\nORDER BY DESC(?mediaporcentajeEmpleo)")' target="_blank">Ejecutar Consulta</a></td>
   </tr> 
 </table>
 
