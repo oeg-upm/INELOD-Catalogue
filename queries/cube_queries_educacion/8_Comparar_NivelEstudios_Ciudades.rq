@@ -10,7 +10,7 @@ PREFIX inelod-voc: <http://stats.linkeddata.es/voc/cubes/vocabulary/>
 SELECT ?ubicacion ?nivelFormacion SUM(?cantidad) AS ?total
 WHERE {
   ?obs a qb:Observation ;
-       sdmx-dim:refArea ?ubicacion ;
+       inelod-voc:municipality ?ubicacion ;
        sdmx-dim:educationLev ?nivelFormacion ;
        sdmx-dim:refPeriod "2022" ;
        sdmx-measure:obsValue ?cantidad .

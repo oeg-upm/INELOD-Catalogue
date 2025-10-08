@@ -1,0 +1,21 @@
+# LN: ¿Cómo se distribuye el nivel educativo según la comunidad autónoma ?
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX place: <http://purl.org/ontology/places#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+SELECT ?comuLabel ?nivelFormacion (SUM(?cantidad) AS ?totalPersonas)
+WHERE {
+  ?obs a qb:Observation ;
+	   inelod-voc:municipality ?munLab ;
+  	   sdmx-dim:educationLev ?nivelFormacion ;
+       sdmx-dim:refPeriod "2022" ;
+       inelod-voc:numberOfPeople ?cantidad .
+  ?mun skos:prefLabel ?munLab;
+       place:in ?prov .
+  ?prov place:in ?comunidad.
+  ?comunidad skos:prefLabel ?comuLabel
+}
+GROUP BY ?comuLabel ?nivelFormacion
+ORDER BY ?comuLabel ?nivelFormacion

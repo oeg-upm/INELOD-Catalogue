@@ -1,0 +1,14 @@
+# LN: ¿Cuántos hombres hay en Vitoria sin estudios?	
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#>  
+PREFIX sdmx-measure:  <http://purl.org/linked-data/sdmx/2009/measure#>  
+PREFIX inelod-voc: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+SELECT DISTINCT ?x ?z WHERE { 
+    ?x inelod-voc:numberOfPeople ?z.
+    ?x rdf:type qb:Observation.
+    ?x inelod-voc:municipality  "01059 Vitoria-Gasteiz".
+    ?x sdmx-dimension:educationLev "Sin estudios".
+    ?x sdmx-dimension:sex "Hombres".
+}

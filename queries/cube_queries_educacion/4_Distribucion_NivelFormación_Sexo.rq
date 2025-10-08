@@ -1,5 +1,5 @@
 # Distribución del nivel de formación por sexo en un año determinado.
-# LN: "Muéstrame el número de personas por nivel de formación y sexo en 2022."
+# LN: ¿Cual es el número de personas por nivel de formación y sexo en 2022?
 
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX ex: <http://example.org/ns/>

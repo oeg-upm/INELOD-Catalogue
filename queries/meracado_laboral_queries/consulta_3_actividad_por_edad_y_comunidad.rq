@@ -15,6 +15,6 @@ WHERE {
        inelod:provinces ?provLabel ;  
        inelod:activityRate ?tasaActividad .
 }
-GROUP BY ?provLabel 
-ORDER BY ?provLabel
+GROUP BY ?provLabel ?sexo
+ORDER BY ?provLabel ?sexo
 
