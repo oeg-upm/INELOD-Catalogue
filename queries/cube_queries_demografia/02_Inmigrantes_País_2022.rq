@@ -3,7 +3,7 @@
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
-PREFIX inelod:       <https://stats.linkeddata.es/voc/cubes/vocabulary#>
+PREFIX inelod:       <https://lod.ine.es/voc/cubes/vocabulary#>
 
 SELECT ?paisNacimiento (SUM(?cantidad) AS ?total)
 WHERE {

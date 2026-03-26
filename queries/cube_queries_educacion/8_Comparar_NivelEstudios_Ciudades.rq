@@ -5,7 +5,7 @@ PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX ex: <http://example.org/ns/>
 PREFIX sdmx-dim:<http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
-PREFIX inelod-voc: <http://stats.linkeddata.es/voc/cubes/vocabulary/>
+PREFIX inelod-voc: <http://lod.ine.es/voc/cubes/vocabulary/>
 
 SELECT ?ubicacion ?nivelFormacion SUM(?cantidad) AS ?total
 WHERE {

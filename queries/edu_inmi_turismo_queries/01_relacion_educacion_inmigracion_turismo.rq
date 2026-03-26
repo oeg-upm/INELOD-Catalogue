@@ -1,7 +1,7 @@
 # LN: ¿Qué relación existe entre el nivel educativo de los inmigrantes y el número de turistas provenientes del mismo país de residencia, en un mismo periodo?
 
 PREFIX qb: <http://purl.org/linked-data/cube#>
-PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+PREFIX inelod: <https://lod.ine.es/voc/cubes/vocabulary#> 
 PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
 
 SELECT ?paisResidencia ?nivelEducativo (SUM(?numInmigrantes) AS ?totalInmigrantes) (SUM(?numTuristas) AS ?totalTuristas)

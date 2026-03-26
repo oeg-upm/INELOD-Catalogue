@@ -7,8 +7,8 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 SELECT  ?labelX ?labelY
 WHERE {
   ?conceptX xkos:ConceptAssociation ?conceptY;
-            skos:inScheme <http://stats.linkeddata.es/voc/clasificaciones//{CLASI1}> ;
+            skos:inScheme <http://lod.ine.es/voc/clasificaciones//{CLASI1}> ;
             skos:prefLabel ?labelXYZ ;
-  ?conceptY skos:inScheme <http://stats.linkeddata.es/voc/clasificaciones//{CLASI2}> ;
+  ?conceptY skos:inScheme <http://lod.ine.es/voc/clasificaciones//{CLASI2}> ;
               skos:prefLabel ?labelABC .
 }

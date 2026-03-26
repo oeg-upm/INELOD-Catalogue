@@ -1,7 +1,7 @@
 # LN: ¿Cuántos turistas han visitado cada comunidad autónoma según el país de residencia y el motivo del viaje?
 
 PREFIX qb: <http://purl.org/linked-data/cube#>
-PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+PREFIX inelod: <https://lod.ine.es/voc/cubes/vocabulary#> 
 PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
 
 SELECT ?dimensionTipo ?dimensionValor (SUM(?numeroTuristas) AS ?totalTuristas)

@@ -2,7 +2,7 @@
 
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
-PREFIX inelod: <https://stats.linkeddata.es/voc/cubes/vocabulary#> 
+PREFIX inelod: <https://lod.ine.es/voc/cubes/vocabulary#> 
 PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX sec-pub: <http://datos.gob.es/kos/sector-publico/sector/>
 
