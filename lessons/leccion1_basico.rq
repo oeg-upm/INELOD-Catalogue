@@ -1,0 +1,18 @@
+# leccion1_basico.rq
+
+# Esta lección introduce el concepto básico de la consulta SPARQL: la tripleta (Sujeto, Predicado, Objeto).
+# El comando SELECT define qué variables queremos ver en el resultado.
+# El asterisco (*) significa "todas las variables".
+
+SELECT *
+WHERE {
+  # En SPARQL, buscamos patrones de tripletas.
+  # Aquí buscamos cualquier sujeto (?obs) que tenga el predicado 'sex'
+  # y guardamos el valor en la variable ?genero.
+  
+  ?obs <http://purl.org/linked-data/sdmx/2009/dimension#sex> ?genero .
+  
+  # El punto al final de la línea cierra el patrón de la tripleta.
+}
+# LIMIT restringe el número de resultados para no saturar la memoria.
+LIMIT 10

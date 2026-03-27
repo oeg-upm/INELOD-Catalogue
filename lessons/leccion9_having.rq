@@ -1,0 +1,16 @@
+# leccion9_having.rq
+
+# A diferencia de FILTER (que actúa sobre filas individuales) HAIVNG actúa sobre los resultados agrupados por GROUP BY. 
+
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX ine-voc: <https://lod.ine.es/voc/cubes/vocabulary#>
+
+SELECT ?periodo (SUM(?num) AS ?totalAnual)
+WHERE {
+  ?obs sdmx-dim:refPeriod ?periodo .
+  ?obs ine-voc:numberOfPeople ?num .
+}
+GROUP BY ?periodo
+# HAVING filtra los grupos. Aquí solo mostramos los años 
+# cuya población total sumada supere las 10,000 unidades.
+HAVING (SUM(?num) > 10000)

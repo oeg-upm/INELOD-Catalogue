@@ -1,0 +1,21 @@
+# leccion6_bind.rq
+
+# En los datos la edad aparece como una cadena de texto ("47 años"), si se quiere tratar como un número para hacer cálculos se debe transformar.
+
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?sexo ?edadOriginal ?edadNumerica
+WHERE {
+  ?obs sdmx-dim:sex ?sexo .
+  ?obs sdmx-dim:age ?edadOriginal .
+  
+  # BIND asigna el resultado de una expresión a una nueva variable.
+  # REPLACE elimina la palabra " años" de la cadena.
+  # xsd:integer() convierte el texto restante en un número entero.
+  BIND(xsd:integer(REPLACE(?edadOriginal, " años", "")) AS ?edadNumerica)
+  
+  # Ahora podemos filtrar por rangos numéricos reales
+  FILTER(?edadNumerica >= 18 && ?edadNumerica <= 25)
+}
+LIMIT 10

@@ -1,0 +1,16 @@
+# leccion4_agregacion.rq
+
+# SPARQL puede realizar cálculos matemáticos como sumas, promedios, conteos, etc. Esto se hace con funciones de agregación como SUM, AVG, COUNT, etc.
+# En esta lección sumaremos el número total de personas en el conjunto de datos.
+
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX ine-voc: <https://lod.ine.es/voc/cubes/vocabulary#>
+
+# SUM suma los valores. Usamos (SUM(...) AS ?total) para dar nombre a la columna.
+SELECT ?sexo (SUM(?numPersonas) AS ?poblacionTotal)
+WHERE {
+  ?obs sdmx-dim:sex ?sexo .
+  ?obs ine-voc:numberOfPeople ?numPersonas .
+}
+# GROUP BY agrupa los resultados por una variable (en este caso, por sexo).
+GROUP BY ?sexo

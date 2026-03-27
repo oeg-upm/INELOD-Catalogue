@@ -1,0 +1,16 @@
+# leccion5_ordenacion.rq
+
+#En esta lección se ordenan los resultados de mayor a menos para encontrar los valores máximos de número de personas por edad en una observación.
+
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX ine-voc: <https://lod.ine.es/voc/cubes/vocabulary#>
+
+SELECT ?edad ?numPersonas
+WHERE {
+  ?obs sdmx-dim:age ?edad .
+  ?obs ine-voc:numberOfPeople ?numPersonas .
+}
+# ORDER BY ordena los resultados. 
+# DESC(?variable) los ordena de forma descendente (de mayor a menor).
+ORDER BY DESC(?numPersonas)
+LIMIT 5

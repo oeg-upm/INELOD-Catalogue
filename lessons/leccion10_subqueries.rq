@@ -1,0 +1,24 @@
+# leccion10_subqueries.rq
+
+# Las subconsultas permiten realizar un cálculo complejo y usar su resultado como entrada para la consulta principal. Por ejemplo encontrar observacoiones que estén por encima de la media.
+
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX ine-voc: <https://lod.ine.es/voc/cubes/vocabulary#>
+
+SELECT ?obs ?numPersonas ?mediaGlobal
+WHERE {
+  ?obs ine-voc:numberOfPeople ?numPersonas .
+  
+  # Subconsulta interna: Calcula el promedio global de todas las observaciones
+  {
+    SELECT (AVG(?n) AS ?mediaGlobal)
+    WHERE {
+      ?o ine-voc:numberOfPeople ?n .
+    }
+  }
+  
+  # Filtramos: Solo observaciones que superen ese promedio calculado
+  FILTER(?numPersonas > ?mediaGlobal)
+}
+ORDER BY DESC(?numPersonas)
+LIMIT 5

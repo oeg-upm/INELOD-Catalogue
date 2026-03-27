@@ -1,0 +1,20 @@
+# leccion7_optional.rq
+
+# No todos los sujetos tienen todas las propiedades, el patrón OPTIONAL intenta obtener un dato sin que la consulta falle si ese dato no existe para un recurso concreto.
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+
+SELECT ?obs ?periodo ?dataset
+WHERE {
+  ?obs a qb:Observation .
+  ?obs sdmx-dim:refPeriod ?periodo .
+  
+  # Intentamos obtener el dataset al que pertenece la observación.
+  # Si una observación no tiene la propiedad qb:dataSet, 
+  # la fila aparecerá igual pero con la columna ?dataset vacía.
+  OPTIONAL {
+    ?obs qb:dataSet ?dataset .
+  }
+}
+LIMIT 20

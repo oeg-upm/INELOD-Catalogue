@@ -1,0 +1,16 @@
+# leccion3_filter.rq
+
+# A menudo solo se necesita una parte de los datos, como por ejemplo los registros de un año específico o un género concreto.
+
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+
+SELECT ?obs ?sexo ?periodo
+WHERE {
+  ?obs sdmx-dim:sex ?sexo .
+  ?obs sdmx-dim:refPeriod ?periodo .
+  
+  # FILTER permite aplicar condiciones lógicas.
+  # Aquí filtramos para que solo devuelva datos del año "2023"
+  # y que el sexo sea específicamente "Mujeres".
+  FILTER(?periodo = "2023" && ?sexo = "Mujeres")
+}

@@ -1,0 +1,18 @@
+# leccion2_prefijos.rq
+
+# Trabajar con las URLs largas que identifican los recursos puede ser tedioso. Utilizamos PREFIX para abreviar las rutas y hacer el código más legible.
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX ine-voc: <https://lod.ine.es/voc/cubes/vocabulary#>
+
+SELECT ?edad ?numPersonas
+WHERE {
+  # Buscamos solo recursos que sean del tipo "Observación" de Data Cube
+  ?obs a qb:Observation .
+  
+  # Obtenemos la edad y el número de personas de esa observación
+  ?obs sdmx-dim:age ?edad .
+  ?obs ine-voc:numberOfPeople ?numPersonas .
+}
+LIMIT 20

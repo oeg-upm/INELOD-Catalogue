@@ -1,0 +1,22 @@
+# leccion8_union.rq
+
+# UNION permite combinar los resultados de dos o más patrones de búsqueda diferentes en un único conjunto de resultados. 
+
+PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX ine-voc: <https://lod.ine.es/voc/cubes/vocabulary#>
+
+SELECT ?periodo ?numPersonas
+WHERE {
+  {
+    # Primer patrón: Datos del año 2021
+    ?obs sdmx-dim:refPeriod "2021" .
+  }
+  UNION
+  {
+    # Segundo patrón: Datos del año 2023
+    ?obs sdmx-dim:refPeriod "2023" .
+  }
+  ?obs sdmx-dim:refPeriod ?periodo .
+  ?obs ine-voc:numberOfPeople ?numPersonas .
+}
+# Esto devolverá una lista mezclada de ambos años.
