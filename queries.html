@@ -27,7 +27,7 @@
     <script>
         function generateYasguiLink(query) {
             const encodedQuery = encodeURIComponent(query);
-            const encodedEndpoint = encodeURIComponent("https://lod.ine.es/sparql");
+            const encodedEndpoint = encodeURIComponent("https://stats.linkeddata.es/sparql");
             window.open(`https://yasgui.triply.cc/#query=${encodedQuery}&endpoint=${encodedEndpoint}`, '_blank');
         }
     </script>    
@@ -128,7 +128,7 @@
     </tr>
     <tr>
         <td>¿Qué conceptos en la clasificación ‘X’ son equivalentes a los de ‘Y’?</td>
-        <td><a class="query-button" onclick='generateYasguiLink("PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nSELECT  ?conceptX ?conceptY\nWHERE {\n  ?conceptX xkos:ConceptAssociation ?conceptY;\n            skos:inScheme <http://lod.ine.es/voc/clasificaciones/cnae/CNAE-93>.\n  ?conceptY skos:inScheme <http://lod.ine.es/voc/clasificaciones/cnae/CNAE-2009>.\n}\n")' target="_blank">Ejecutar Consulta</a></td>
+        <td><a class="query-button" onclick='generateYasguiLink("PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nSELECT  ?conceptX ?conceptY\nWHERE {\n  ?conceptX xkos:ConceptAssociation ?conceptY;\n            skos:inScheme <http://lod.ine.es/voc/clasificaciones/cnae/CNAE-93-Rev.1>.\n  ?conceptY skos:inScheme <http://lod.ine.es/voc/clasificaciones/cnae/CNAE-2009>.\n}\n")' target="_blank">Ejecutar Consulta</a></td>
     </tr>
     <tr>
         <td>¿Cuál es la descripción detallada de la categoría ‘X’ en la clasificación ‘Y’?</td>
