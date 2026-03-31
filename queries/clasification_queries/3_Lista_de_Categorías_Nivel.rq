@@ -9,6 +9,6 @@ WHERE {
   ?classification skos:prefLabel ?concepto ;
                   skos:member ?level .
   ?level rdf:type xkos:ClassificationLevel ;
-         skos:inScheme <http://lod.ine.es/voc/clasificaciones/{CLASI}>;
+         skos:inScheme <http://lod.ine.es/clasificaciones/{CLASI}>;
          xkos:depth "1".
 }

@@ -3,7 +3,7 @@
 # UNION permite combinar los resultados de dos o más patrones de búsqueda diferentes en un único conjunto de resultados. 
 
 PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
-PREFIX ine-voc: <https://lod.ine.es/voc/cubes/vocabulary#>
+PREFIX ine-voc: <https://lod.ine.es/cubes/vocabulary#>
 
 SELECT ?periodo ?numPersonas
 WHERE {

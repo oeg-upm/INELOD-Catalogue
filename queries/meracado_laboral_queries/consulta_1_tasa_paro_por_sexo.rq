@@ -2,7 +2,7 @@
 
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
-PREFIX inelod: <https://lod.ine.es/voc/cubes/vocabulary#>
+PREFIX inelod: <https://lod.ine.es/cubes/vocabulary#>
 
 SELECT ?periodo ?sexo (AVG(?tasaParo) AS ?tasaMediaParo)
 WHERE {

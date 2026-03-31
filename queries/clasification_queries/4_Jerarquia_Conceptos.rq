@@ -6,7 +6,7 @@ PREFIX  xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 SELECT ?parentLabel ?childLabel
 WHERE {
-  ?parent skos:inScheme <http://lod.ine.es/voc/clasificaciones//{CLASI}> ;
+  ?parent skos:inScheme <http://lod.ine.es/clasificaciones//{CLASI}> ;
           skos:prefLabel ?parentLabel .
   ?child skos:broader ?parent ;
          skos:prefLabel ?childLabel .

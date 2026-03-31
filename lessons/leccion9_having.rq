@@ -3,7 +3,7 @@
 # A diferencia de FILTER (que actúa sobre filas individuales) HAIVNG actúa sobre los resultados agrupados por GROUP BY. 
 
 PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
-PREFIX ine-voc: <https://lod.ine.es/voc/cubes/vocabulary#>
+PREFIX ine-voc: <https://lod.ine.es/cubes/vocabulary#>
 
 SELECT ?periodo (SUM(?num) AS ?totalAnual)
 WHERE {
