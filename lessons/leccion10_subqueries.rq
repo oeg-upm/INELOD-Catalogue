@@ -3,7 +3,7 @@
 # Las subconsultas permiten realizar un cálculo complejo y usar su resultado como entrada para la consulta principal. Por ejemplo encontrar observacoiones que estén por encima de la media.
 
 PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
-PREFIX ine-voc: <https://lod.ine.es/cubes/vocabulary#>
+PREFIX ine-voc: <https://lod.ine.es/def/vocabulary/>
 
 SELECT ?obs ?numPersonas ?mediaGlobal
 WHERE {

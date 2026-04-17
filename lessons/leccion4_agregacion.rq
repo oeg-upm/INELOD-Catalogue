@@ -4,7 +4,7 @@
 # En esta lección sumaremos el número total de personas en el conjunto de datos.
 
 PREFIX sdmx-dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
-PREFIX ine-voc: <https://lod.ine.es/cubes/vocabulary#>
+PREFIX ine-voc: <https://lod.ine.es/def/vocabulary/>
 
 # SUM suma los valores. Usamos (SUM(...) AS ?total) para dar nombre a la columna.
 SELECT ?sexo (SUM(?numPersonas) AS ?poblacionTotal)
